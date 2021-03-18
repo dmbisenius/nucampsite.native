@@ -4,13 +4,20 @@ import Main from './components/MainComponent';
 import { Provider } from 'react-redux';
 import { ConfigureStore } from './redux/configureStore';
 
-const store= ConfigureStore()
+import { PersistGate } fromt 'redux-persist/es/intergration/react';
+import Loading from './components/LoadingComponent';
 
+
+const { persistor, store } = ConfigureStore();
 
 export default function App() {
     return (
-        <Provider store = {store}>
-        <Main />
+        <Provider store={store}>
+            <PersistGate
+                loading={<Loading />}
+                persistor={persistor}>
+                <Main />
+            </PersistGate>
         </Provider>
     );
 }
